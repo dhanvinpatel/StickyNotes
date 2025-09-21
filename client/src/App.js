@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Plus } from 'lucide-react';
 import NoteModal from './Components/NoteModal';
 
 function App() {
+  const [openModal, setOpenModal] = useState(false);
 
   return (
     <div className="h-screen bg-chalkboard">
@@ -15,6 +15,7 @@ function App() {
           <Plus size={20} />
           New Note
         </button>
+        {openModal && <NoteModal setOpenModal={setOpenModal} />}
       </div>
     </div>
   );
