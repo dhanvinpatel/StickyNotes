@@ -15,9 +15,7 @@ app.use(express.json());
 
 dbConnect();
 
-app.use("/", (req, res) => {
-  res.send("Server is running")
-});
+app.use("/api/notes", noteRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
