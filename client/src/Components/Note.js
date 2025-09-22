@@ -19,12 +19,16 @@ function Note({ id, title, description, dueDate, handleNoteDelete }) {
             {openOptions && <OptionsModal setNoteColor={setNoteColor} id={id} handleNoteDelete={handleNoteDelete} />}
           </div>
           <div>
-            <h2 className='font-bold'>{title}</h2>
-            <p>Due: {`${date[1]}/${date[2]}/${date[0]}`}</p>
+            {title ? <h2 className='font-bold'>{title}</h2> :
+              <h2 className='font-bold'>No Title</h2>
+            }
+            <p>Due: {dueDate ? `${date[1]}/${date[2]}/${date[0]}` : 'No date set'}</p>
           </div>
         </div>
         <div className='flex flex-col p-4 rounded-b-md resize' style={{ backgroundColor: noteColor }}>
-          <p className='w-full break-words'>{description}</p>
+          {description ? <p className='w-full break-words'>{description}</p> :
+            <p>No Description</p>
+          }
         </div>
       </div>
     </Draggable>
