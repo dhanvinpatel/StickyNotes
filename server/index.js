@@ -15,6 +15,7 @@ app.use(express.json());
 
 dbConnect();
 
+app.get('/', (req, res) => res.status(200).json({ message: 'Hello' }));
 app.use("/api/notes", noteRoutes);
 
 app.listen(PORT, () => {
