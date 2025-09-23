@@ -2,23 +2,23 @@ import { SquarePen } from 'lucide-react';
 import { Trash2 } from 'lucide-react';
 
 function NoteOptions({ setNoteColor, id, handleNoteDelete }) {
-  const colorOptions = ['#FFA41B', '#00A8CC', '#FF6D24', '#A64D79', '#713045'];
+  const colorOptions = ['#FFA41B', '#5BBCFF', '#FF6D24', '#A376A2', '#D3DAD9', '#E8988A'];
 
   return (
     <div className='flex flex-col'>
-      <div className='flex justify-end my-2'>
+      <div className='flex justify-end mb-2'>
         {colorOptions.map((color, index) => (
           <div
             key={index}
-            className='w-6 h-6 rounded-full ml-1'
+            className='w-6 h-6 cursor-pointer rounded-full ml-1'
             style={{ backgroundColor: color }}
             onClick={() => { setNoteColor(color) }}
           ></div>
         ))}
       </div>
       <div className='flex justify-end'>
-        <SquarePen />
-        <Trash2 className='ml-4' onClick={() => { handleNoteDelete(id) }} />
+        <SquarePen className='cursor-pointer' />
+        <Trash2 className='cursor-pointer ml-4' onClick={() => { handleNoteDelete(id) }} />
       </div>
     </div>
   )
