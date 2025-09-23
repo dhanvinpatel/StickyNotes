@@ -7,8 +7,12 @@ export const theme = {
     colors: {
       chalkboard: "#274C43",
       chalkboardLight: "#9BCDB0",
+      noteHeading: "#FFF5F2",
+    },
+    fontFamily: {
+      'caveat': ['Caveat', 'sans-serif']
     }
   },
 };
-export const plugins = [];
 
+export const plugins = [];
