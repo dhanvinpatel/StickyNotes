@@ -19,7 +19,7 @@ function NoteModal({ setOpenModal, setNotes }) {
     };
 
     try {
-      const addedNote = await axios.post('http://localhost:4000/api/notes', newNote);
+      const addedNote = await axios.post('https://sticky-notes-backend-ashen.vercel.app/api/notes', newNote);
       setOpenModal(false);
       setNotes((prev) => [...prev, addedNote.data]);
     } catch (error) {
