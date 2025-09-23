@@ -2,7 +2,7 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 import axios from 'axios';
 
-function NoteModal({ mode, setOpenModal, setNoteAdded }) {
+function NoteModal({ setOpenModal, setNotes }) {
   const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -19,13 +19,13 @@ function NoteModal({ mode, setOpenModal, setNoteAdded }) {
     };
 
     try {
-      await axios.post('https://sticky-notes-backend-ashen.vercel.app/api/notes', newNote);
+      const addedNote = await axios.post('http://localhost:4000/api/notes', newNote);
       setOpenModal(false);
-      setNoteAdded(true);
+      setNotes((prev) => [...prev, addedNote.data]);
     } catch (error) {
       console.error('Error creating note:', error);
     }
-  }
+  };
 
   return (
     <div className='h-screen w-screen fixed flex justify-center items-center z-10 inset-0 bg-chalkboardLight bg-opacity-50'>
@@ -59,7 +59,7 @@ function NoteModal({ mode, setOpenModal, setNoteAdded }) {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
 export default NoteModal;

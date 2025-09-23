@@ -1,14 +1,13 @@
 import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 import { Ellipsis } from 'lucide-react';
-import OptionsModal from './NoteOptions';
+import NoteOptions from './NoteOptions';
 
-
-function Note({ id, title, description, dueDate, handleNoteDelete }) {
+function Note({ note, setNotes }) {
   const nodeRef = useRef(null);
   const [noteColor, setNoteColor] = useState('#FFA41B');
   const [openOptions, setOpenOptions] = useState(false);
-  const date = dueDate.split('-');
+  const date = note.dueDate.split('-');
 
   return (
     <Draggable nodeRef={nodeRef} bounds={{ left: 0 }}>
@@ -16,23 +15,23 @@ function Note({ id, title, description, dueDate, handleNoteDelete }) {
         <div className='flex flex-col bg-noteHeading rounded-t-md px-4 py-1'>
           <div className='flex flex-col items-end'>
             <Ellipsis className='cursor-pointer' onClick={() => { setOpenOptions(prev => !prev) }} />
-            {openOptions && <OptionsModal setNoteColor={setNoteColor} id={id} handleNoteDelete={handleNoteDelete} />}
+            {openOptions && <NoteOptions setNoteColor={setNoteColor} noteId={note._id} setNotes={setNotes} />}
           </div>
           <div>
-            {title ? <h2 className='font-bold text-2xl'>{title}</h2> :
+            {note.title ? <h2 className='font-bold text-2xl'>{note.title}</h2> :
               <h2 className='font-bold text-2xl'>No Title</h2>
             }
-            <p className='text-lg'>Due: {dueDate ? `${date[1]}/${date[2]}/${date[0]}` : 'No date set'}</p>
+            <p className='text-lg'>Due: {note.dueDate ? `${date[1]}/${date[2]}/${date[0]}` : 'No date set'}</p>
           </div>
         </div>
         <div className='flex flex-col p-4 rounded-b-md resize' style={{ backgroundColor: noteColor }}>
-          {description ? <p className='w-full text-xl break-words'>{description}</p> :
+          {note.description ? <p className='w-full text-xl break-words'>{note.description}</p> :
             <p className='text-xl'>No Description</p>
           }
         </div>
       </div>
     </Draggable>
-  )
+  );
 }
 
 export default Note;
