@@ -3,8 +3,10 @@ import Note from "./Note.js";
 const getAllNotes = async (req, res) => {
   try {
     const notes = await Note.find();
+
     res.status(200).json(notes);
   } catch (error) {
+    console.error('Error getting notes:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -21,6 +23,7 @@ const createNote = async (req, res) => {
 
     res.status(201).json(newNote);
   } catch (error) {
+    console.error('Error creating note:', error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -38,15 +41,18 @@ const updateNote = async (req, res) => {
 
     res.status(200).json(updatedNote);
   } catch (error) {
+    console.error('Error updating note:', error);
     res.status(500).json({ error: error.message });
   }
 }
 
-const deleteNote = async (req, res) => {
+const deleteNote = async (req, res) => {  
   try {
-    await Note.findOneAndDelete(req.params.id);
+    await Note.findByIdAndDelete(req.params.id);
+    
     res.status(204).send();
   } catch (error) {
+    console.error('Error deleting note:', error);
     res.status(500).json({ error: error.message });
   }
 }
