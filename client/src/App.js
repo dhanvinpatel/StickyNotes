@@ -6,9 +6,9 @@ import axios from 'axios';
 
 function App() {
   const [notes, setNotes] = useState([]);
-  const [noteAdded, setNoteAdded] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+  // Fetch the notes from the database
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -17,23 +17,14 @@ function App() {
       } catch (error) {
         console.error('Error fetching notes: ', error);
       }
-    }
+    };
 
     fetchNotes();
-  }, [noteAdded]);
-
-  const handleNoteDelete = async (id) => {
-    try {
-      await axios.delete(`https://sticky-notes-backend-ashen.vercel.app/api/notes/${id}`);
-      setNotes((prev) => prev.filter(note => note._id !== id));
-    } catch (error) {
-      console.error('Failed to delete note: ', error);
-    }
-  }
+  }, []);
 
   return (
     <div className='h-screen overflow-y-auto bg-chalkboard font-caveat'>
-      <div className='h-screen overflow-y-auto border-8 border-solid border-yellow-900 rounded-lg px-4 pb-4'>
+      <div className='h-screen overflow-y-auto border-4 border-solid border-yellow-900 rounded-lg px-4 pb-4'>
         <h1 className='text-4xl font-bold text-white w-fit mx-auto border-4 border-solid border-yellow-900 border-t-0 rounded-b-lg p-3 pr-5'>Sticky Notes</h1>
         <button className='flex items-center gap-2 ml-5 my-5 text-xl text-white font-semibold border-collapse bg-yellow-900 rounded-lg px-4 py-2 hover:bg-yellow-700'
           onClick={() => { setOpenModal(true) }}
@@ -41,16 +32,9 @@ function App() {
           <Plus size={24} />
           New Note
         </button>
-        {openModal && <NoteModal setOpenModal={setOpenModal} setNoteAdded={setNoteAdded} />}
+        {openModal && <NoteModal setOpenModal={setOpenModal} setNotes={setNotes} />}
         {notes.map((note) => (
-          <Note
-            key={note._id}
-            id={note._id}
-            title={note.title}
-            description={note.description}
-            dueDate={note.dueDate}
-            handleNoteDelete={handleNoteDelete}
-          />
+          <Note key={note._id} note={note} setNotes={setNotes} />
         ))}
       </div>
     </div>
