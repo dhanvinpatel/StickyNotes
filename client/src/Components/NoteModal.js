@@ -34,7 +34,7 @@ function NoteModal({ mode, setOpenModal, setNoteAdded }) {
           <h2 className='text-3xl text-white font-bold'>Note</h2>
           <X className='text-red-500 hover:text-white cursor-pointer' onClick={() => { setOpenModal(false) }} />
         </div>
-        <form className='flex flex-col justify-evenly py-4 grow' onSubmit={handleSubmit}>
+        <form className='flex flex-col text-xl justify-evenly py-4 grow' onSubmit={handleSubmit}>
           <div className='flex flex-col mb-4 px-4'>
             <label htmlFor='title' className='text-white'>Title</label>
             <input type='text' name='title' placeholder='Tile' className='rounded-md p-2 mt-2' value={title} onChange={(e) => setTitle(e.target.value)} />
