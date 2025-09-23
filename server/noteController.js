@@ -25,6 +25,23 @@ const createNote = async (req, res) => {
   }
 };
 
+const updateNote = async (req, res) => {
+  const noteId = req.params.id;
+  const noteUpdates = req.body;
+  
+  try {
+    const updatedNote = await Note.findByIdAndUpdate(noteId, noteUpdates, { new: true });
+
+    if (!updatedNote) {
+      res.status(404).json({ message: 'Resource not found' });
+    }
+
+    res.status(200).json(updatedNote);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 const deleteNote = async (req, res) => {
   try {
     await Note.findOneAndDelete(req.params.id);
@@ -37,5 +54,6 @@ const deleteNote = async (req, res) => {
 export {
   getAllNotes,
   createNote,
+  updateNote,
   deleteNote,
 }
