@@ -20,7 +20,7 @@ function EditNoteModal({ setOpenEditModal, note, setNotes }) {
     };
 
     try {
-      const updatedNote = await axios.patch(`http://localhost:4000/api/notes/${note._id}`, editedNote);
+      const updatedNote = await axios.patch(`https://sticky-notes-backend-ashen.vercel.app/api/notes/${note._id}`, editedNote);
       setOpenEditModal(false);
       setNotes((prev) =>
         prev.map((oldNote) =>
