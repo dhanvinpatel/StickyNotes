@@ -28,7 +28,7 @@ function EditNoteModal({ setOpenEditModal, note, setNotes }) {
         )
       );
     } catch (error) {
-      console.error('Error creating note:', error);
+      console.error('Error updating note:', error);
     }
   };
 
