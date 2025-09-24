@@ -5,6 +5,10 @@ const noteSchema = new mongoose.Schema(
     title: String,
     description: String,
     dueDate: String,
+    color: {
+      type: String,
+      default: '#FFA41B',
+    },
   },
   {
     timestamps: true
