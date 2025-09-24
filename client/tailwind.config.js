@@ -7,7 +7,7 @@ export const theme = {
     colors: {
       chalkboard: "#274C43",
       chalkboardLight: "#9BCDB0",
-      noteHeading: "#FFF5F2",
+      noteHeading: "#FFFFC5",
     },
     fontFamily: {
       'caveat': ['Caveat', 'sans-serif']
