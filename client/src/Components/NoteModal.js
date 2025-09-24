@@ -6,7 +6,7 @@ function NoteModal({ setOpenModal, setNotes }) {
   const currentDate = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  const [dueDate, setDate] = useState('');
 
   // Handle creating notes
   const handleSubmit = async (e) => {
@@ -15,7 +15,7 @@ function NoteModal({ setOpenModal, setNotes }) {
     const newNote = {
       title: title,
       description: description,
-      dueDate: date
+      dueDate: dueDate
     };
 
     try {
@@ -45,7 +45,7 @@ function NoteModal({ setOpenModal, setNotes }) {
           </div>
           <div className='flex flex-col px-4 pb-4'>
             <label htmlFor='date' className='text-white'>Due Date</label>
-            <input type='date' name='date' min={currentDate} className='rounded-md p-2 my-2' value={date} onChange={(e) => setDate(e.target.value)} />
+            <input type='date' name='date' min={currentDate} className='rounded-md p-2 my-2' value={dueDate} onChange={(e) => setDate(e.target.value)} />
           </div>
           <div className='flex justify-end  border-t border-black px-4 py-4'>
             <button
