@@ -37,7 +37,7 @@ function NoteModal({ setOpenModal, setNotes }) {
         <form className='flex flex-col text-xl justify-evenly py-4 grow' onSubmit={handleSubmit}>
           <div className='flex flex-col mb-4 px-4'>
             <label htmlFor='title' className='text-white'>Title</label>
-            <input type='text' name='title' placeholder='Tile' className='rounded-md p-2 mt-2' value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input type='text' name='title' placeholder='Title' className='rounded-md p-2 mt-2' value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <div className='flex flex-col mb-4 px-4'>
             <label htmlFor='description' className='text-white'>Description</label>
