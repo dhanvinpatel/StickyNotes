@@ -16,6 +16,23 @@ function NoteOptions({ setNoteColor, note, setNotes, openEditModal, setOpenEditM
     }
   };
 
+  // Handle note color update
+  const handleUpdateColor = async (color) => {
+    const editedNote = { color };
+
+    try {
+      const updatedNote = await axios.patch(`https://sticky-notes-backend-ashen.vercel.app/api/notes/${note._id}`, editedNote);
+      setNoteColor(color)
+      setNotes((prev) =>
+        prev.map((oldNote) =>
+          oldNote._id === note._id ? { ...oldNote, ...updatedNote.data } : oldNote
+        )
+      );
+    } catch (error) {
+      console.error('Error updating note color:', error);
+    }
+  }
+
   return (
     <div className='absolute flex items-start mt-1'>
       <div className='flex'>
@@ -24,7 +41,7 @@ function NoteOptions({ setNoteColor, note, setNotes, openEditModal, setOpenEditM
             key={index}
             className='w-6 h-6 cursor-pointer rounded-full mr-1'
             style={{ backgroundColor: color }}
-            onClick={() => { setNoteColor(color) }}
+            onClick={() => { handleUpdateColor(color) }}
           ></div>
         ))}
       </div>

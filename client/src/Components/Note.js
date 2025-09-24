@@ -5,7 +5,7 @@ import NoteOptions from './NoteOptions';
 
 function Note({ note, setNotes }) {
   const nodeRef = useRef(null);
-  const [noteColor, setNoteColor] = useState('#FFA41B');
+  const [noteColor, setNoteColor] = useState(note.color);
   const [openOptions, setOpenOptions] = useState(false);
   const [openEditModal, setOpenEditModal] = useState(false);
   const date = note.dueDate.split('-');
