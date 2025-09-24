@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { SquarePen } from 'lucide-react';
 import { Trash2 } from 'lucide-react';
+import EditNoteModal from './EditNoteModal';
 
-function NoteOptions({ setNoteColor, noteId, setNotes }) {
+function NoteOptions({ setNoteColor, note, setNotes, openEditModal, setOpenEditModal }) {
   const colorOptions = ['#FFA41B', '#5BBCFF', '#FF6D24', '#A376A2', '#D3DAD9', '#E8988A'];
 
   // Delete the note from the database
@@ -16,20 +17,26 @@ function NoteOptions({ setNoteColor, noteId, setNotes }) {
   };
 
   return (
-    <div className='flex flex-col'>
-      <div className='flex justify-end mb-2'>
+    <div className='absolute flex items-start mt-1'>
+      <div className='flex'>
         {colorOptions.map((color, index) => (
           <div
             key={index}
-            className='w-6 h-6 cursor-pointer rounded-full ml-1'
+            className='w-6 h-6 cursor-pointer rounded-full mr-1'
             style={{ backgroundColor: color }}
             onClick={() => { setNoteColor(color) }}
           ></div>
         ))}
       </div>
-      <div className='flex justify-end'>
-        <SquarePen className='cursor-pointer' />
-        <Trash2 className='cursor-pointer ml-4' onClick={() => { handleNoteDelete(noteId) }} />
+      <div className='flex ml-6'>
+        <SquarePen className='cursor-pointer' onClick={() => { setOpenEditModal(true) }} />
+        {openEditModal &&
+          <EditNoteModal
+            setOpenEditModal={setOpenEditModal}
+            note={note}
+            setNotes={setNotes}
+          />}
+        <Trash2 className='cursor-pointer ml-2' onClick={() => { handleNoteDelete(note._id) }} />
       </div>
     </div>
   )
